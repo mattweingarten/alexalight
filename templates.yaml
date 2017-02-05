@@ -1,0 +1,5 @@
+intro: Let there be light!
+
+help:  <speak>Here is a list of all the current options<break time="1s"/> "{{options|join(', ')}}" </speak>
+
+option: <speak> Automated mode activated!</speak>
