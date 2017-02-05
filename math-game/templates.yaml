@@ -1,0 +1,11 @@
+new_game: Hey Eric, lets play a game. I have some math questions for you. Should we start ?
+
+question: Alright lets start, what is {{ nums[0] }} plus {{ nums[1] }} ?
+
+win: Nice work, buddy.
+
+# wrong: Sorry man. Do you want to try again ?
+
+over: Come on, man. Are you an, idiot ?
+
+noanswer: Okay buddy... Let me know when you are ready.
