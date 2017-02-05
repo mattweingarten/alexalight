@@ -1,0 +1,56 @@
+Intent Schema
+
+{
+  "intents": [{
+    "intent": "HelpIntent"
+  	},
+    {"intent": "StopIntent"},
+    {"intent": "OptionIntent",
+    "slots": [{
+              "name": "option",
+              "type": "OPTIONS"
+    		 }]}
+            	]
+}
+
+
+
+
+
+Sample Utterances
+
+HelpIntent help
+HelpIntent help me
+HelpIntent what can I ask you
+HelpIntent yes
+HelpIntent yea
+HelpIntent sure
+
+StopIntent stop
+StopIntent shut the fuck up
+StopIntent shut it
+StopIntent quiet
+
+OptionIntent {option}
+OptionIntent {option} mode
+OptionIntent turn on {option}
+OptionIntent turn on {option} mode
+OptionIntent start {option} mode
+OptionIntent start {option}
+OptionIntent light {option}
+
+
+
+
+Custom Slots:
+
+OPTIONS
+automated
+on
+off
+sunset
+nighttime
+day
+alarm
+sex
+rickroll
