@@ -75,6 +75,8 @@ def options(option):
         power_off()
         return statement("Lights off")
 
+
+
 # while session.attributes['automated'] == True
 #     POST LIGHTURL
 
