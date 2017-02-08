@@ -3,12 +3,12 @@ import requests
 from flask import Flask, render_template, redirect
 from flask_ask import Ask, statement, question, session
 from flask_redis import FlaskRedis
-from tasks import off, new_w
+from tasks import off, new_w, lights
 from bulb import power_on, power_off
 from brightness import kelvin, brightness
 from weather import sunrise_sunset
 from flask.ext.dotenv import DotEnv
-
+import time
 
 app = Flask(__name__)
 env = DotEnv(app)
@@ -41,19 +41,24 @@ def stop():
 def options(option):
     if option == "automated":
         new_w.delay()
+        lights.delay()
         msg = render_template('option') #call light function
         return statement(msg)
 
     elif option =="off":
         off.delay()
+        time.sleep(3)
         power_off()
         return statement("Lights off")
+
     elif option =="on":
         power_on(1.0 ,3100 ,200, 0.8, 2.0)
         return statement("Lights on")
+
     elif option =="sunrise":
         power_on(1.0, 2500, 200, 0.8, 20.0)
         return statement("Sunrise mode activated")
+      
     elif option =="sunset":
         power_on(1.0, 2500, 200, 0.8, 20.0)
         return statement("Sunset mode activated")
