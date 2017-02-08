@@ -1,36 +1,31 @@
 import json
 import requests
+from flask.ext.dotenv import DotEnv
 
-
-token = ENV['BULB_TOKEN']
+token = "ce9c8aa55aa9cefe55bcd79c66cafce27c94c4eda592c3ab9649619e26cac69c"
 
 headers = {
     "Authorization": "Bearer %s" % token,
 }
 
-
-def power_on(brightness, kelvin, hue=200, saturation=1.0, duration=1.0):
+def power_on(brightness, kelvin, hue=200, saturation=0, duration=1.0):
     payload = {
       "states": [
-        {
-            "selector" : "all",
-            "hue": hue,
-            "brightness": brightness,
-            "kelvin": kelvin
-        }
+      {
+      "selector" : "all",
+      "hue": hue,
+      "brightness": brightness,
+      "kelvin": kelvin
+      }
       ],
       "defaults": {
-        "power": "on",
-        "saturation": saturation,
-        "duration": duration
-
-    	}
-    }
-
+      "power": "on",
+      "saturation": saturation,
+      "duration": duration
+      }
+      }
     response = requests.put('https://api.lifx.com/v1/lights/states', data=json.dumps(payload), headers=headers)
     print(response.content)
-
-
 
 def power_off():
 	payload = {
