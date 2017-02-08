@@ -9,13 +9,14 @@ from flask_ask import session
 from celery.signals import celeryd_init
 from helper import from_string_to_time
 
-
 app = Celery('tasks', broker='redis://localhost:6379/0')
 
-app.conf.timezone = 'Europe/London'
+app.conf.timezone = 'US/Pacific-New'
 
 app.conf.update(worker_pool_restarts=True)
 from automated import custom_automated
+from alarm import set_alarm_time
+
 
 @app.task
 def new_w():
@@ -23,6 +24,12 @@ def new_w():
     app.worker_main(argv)
     return
 
+
+@app.task
+def new_alarm():
+    argv = ['celery','-A','alarm','--loglevel=DEBUG','-B', '--hostname=worker2@dbc']
+    app.worker_main(argv)
+    return
 
 
 @app.task
