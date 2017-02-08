@@ -20,13 +20,19 @@ def brightness(sunrise, sunset, int_length):
 #private
 
 def delta_between_intervals(sunrise, sunset, int_length):
-  length_in_minutes = (sunset.hour - sunrise.hour) * 60 +  sunset.minute -  sunrise.minute
+  if sunrise <= sunset:
+      length_in_minutes = (sunset.hour - sunrise.hour) * 60 +  sunset.minute -  sunrise.minute
+  else:
+      length_in_minutes = (sunset.hour - sunrise.hour + 24) * 60 +  sunset.minute -  sunrise.minute
   max_int_count = length_in_minutes/int_length
   return 2.0/max_int_count
 
 def amount_of_delta(sunrise,int_length):
   now = datetime.now()
-  length_in_minutes = (now.hour - sunrise.hour) * 60 +  now.minute - sunrise.minute
+  if sunrise <= sunset:
+      length_in_minutes = (sunset.hour - sunrise.hour) * 60 +  sunset.minute -  sunrise.minute
+  else:
+       length_in_minutes = (sunset.hour - sunrise.hour + 24) * 60 +  sunset.minute -  sunrise.minute
   amount_of_intervals = length_in_minutes/int_length
   return amount_of_intervals
 
