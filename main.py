@@ -4,12 +4,14 @@ from flask import Flask, render_template, redirect
 from flask_ask import Ask, statement, question, session
 from flask_redis import FlaskRedis
 from tasks import off, new_w, lights
+from automated import custom_automated
 from bulb import power_on, power_off
 from brightness import kelvin, brightness
 from weather import sunrise_sunset
 from flask.ext.dotenv import DotEnv
+import datetime
 import time
-
+from helper import from_string_to_time
 app = Flask(__name__)
 env = DotEnv(app)
 redis_store = FlaskRedis(app)
@@ -38,10 +40,28 @@ def stop():
 
 
 @ask.intent("OptionIntent")
-def options(option):
+def options(option,sunrise,sunset):
     if option == "automated":
-        new_w.delay()
-        lights.delay()
+        if (sunrise == None and sunset == None):
+            new_w.delay()
+            lights.delay()
+        else:
+            sunrise = from_string_to_time(sunrise)
+            sunset = from_string_to_time(sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            lights.delay(sunrise,sunset)
+            new_w.delay()
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+            custom_automated.delay(sunrise, sunset)
+
         msg = render_template('option') #call light function
         return statement(msg)
 
@@ -74,6 +94,8 @@ def options(option):
     elif option =="romance":
         power_on(0.2, 1500, 300, 0.5, 2.0)#Pink? I think its not that bad
         return statement("Romance mode")
+
+
 
 
 if __name__ == '__main__':
