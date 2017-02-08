@@ -9,12 +9,3 @@ app.conf.beat_schedule = {
         'schedule': 420.0
     },
 }
-
-
-@app.task
-def lights():
-    sun = sunrise_sunset()
-    b = brightness(sun['sunrise'],sun['sunset'],1)*0.9
-    k = kelvin(sun['sunrise'],sun['sunset'],1)
-    power_on(b,k)
-    return

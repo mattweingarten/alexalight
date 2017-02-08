@@ -3,8 +3,7 @@ import requests
 from flask import Flask, render_template, redirect
 from flask_ask import Ask, statement, question, session
 from flask_redis import FlaskRedis
-from tasks import off, new_w
-from automated import lights
+from tasks import off, new_w, lights
 from bulb import power_on, power_off
 from brightness import kelvin, brightness
 from weather import sunrise_sunset
