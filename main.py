@@ -52,25 +52,28 @@ def options(option):
         return statement("Lights off")
 
     elif option =="on":
-        power_on(1.0 ,3100 ,200, 0.8, 2.0)
+        power_on(0.75 ,2700 ,200, .2, 2.0)#This brightness will light up the room
         return statement("Lights on")
 
-    elif option =="sunrise":
-        power_on(1.0, 2500, 200, 0.8, 20.0)
+    elif option =="sunrise":#Sunrise is good tp gp
+        power_on(0.55, 2500, 50, 0.8, 20.0)
         return statement("Sunrise mode activated")
-      
+
     elif option =="sunset":
-        power_on(1.0, 2500, 200, 0.8, 20.0)
+        power_on(0.45, 2500, 50, 0.8, 20.0)#Made a little brighter than sunrise but good to go
         return statement("Sunset mode activated")
-    elif option =="night"
-        power_on(1.0, 1000, 200, 0.65, 2.0)
+
+    elif option =="night":
+        power_on(0.05, 2100, 175, .90, 2.0)#Maybe this is the right blue or maybe more purple?
         return statement("Night mode activated")
-    elif option =="party"
-        power_on(1.0, 2500, 200, 0.5, 20.0)#random??
+
+    elif option =="party":
+        power_on(.75, 2200, 300, 0.5, 2.0)#create a task to go through various colors
         return statement("Party mode activated")
-    elif option =="romance"
-        power_on(1.0, 1100, 200, 0.5, 2.0)
-        return statement("Get it on")
+
+    elif option =="romance":
+        power_on(0.2, 1500, 300, 0.5, 2.0)#Pink? I think its not that bad
+        return statement("Romance mode")
 
 
 if __name__ == '__main__':
