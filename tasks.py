@@ -22,11 +22,8 @@ def new_w():
     argv = ['celery','-A','automated','--loglevel=DEBUG','-B', '--hostname=worker2@dbc']
     app.worker_main(argv)
     return
-@app.task
-def new_custom_w():
-    argv = ['celery','-A','tasks','--loglevel=DEBUG','-B', '--hostname=worker2@dbc']
-    app.worker_main(argv)
-    return
+
+
 
 @app.task
 def off():
@@ -40,10 +37,7 @@ def lights(sunrise=None,sunset=None):
         sun = sunrise_sunset()
         b = brightness(sun['sunrise'],sun['sunset'],1)*0.9
         k = kelvin(sun['sunrise'],sun['sunset'],1)
-        print "Doesnt work!"
     else:
-        print "Fuck YEEEEAAAA!"
-        print sunrise.encode('ascii','ignore')
         sunrise =  from_string_to_time(sunrise.encode('ascii','ignore'))
         sunset =  from_string_to_time(sunset.encode('ascii','ignore'))
         b = brightness(sunrise,sunset,1)*0.9
