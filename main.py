@@ -3,7 +3,7 @@ import requests
 from flask import Flask, render_template, redirect
 from flask_ask import Ask, statement, question, session
 from flask_redis import FlaskRedis
-from tasks import off, new_w, lights
+from tasks import off, new_w, lights, new_alarm
 from automated import custom_automated
 from bulb import power_on, power_off
 from brightness import kelvin, brightness
@@ -11,7 +11,8 @@ from weather import sunrise_sunset
 from flask.ext.dotenv import DotEnv
 import datetime
 import time
-from helper import from_string_to_time
+from alarm import set_alarm_time
+from helper import from_string_to_time, day_of_week
 app = Flask(__name__)
 env = DotEnv(app)
 redis_store = FlaskRedis(app)
@@ -40,7 +41,7 @@ def stop():
 
 
 @ask.intent("OptionIntent")
-def options(option,sunrise,sunset):
+def options(option,sunrise,sunset,day):
     if option == "automated":
         if (sunrise == None and sunset == None):
             new_w.delay()
@@ -48,6 +49,8 @@ def options(option,sunrise,sunset):
         else:
             sunrise = from_string_to_time(sunrise)
             sunset = from_string_to_time(sunset)
+
+            ##I dont know why but it only works with many updates
             custom_automated.delay(sunrise, sunset)
             custom_automated.delay(sunrise, sunset)
             custom_automated.delay(sunrise, sunset)
@@ -65,6 +68,21 @@ def options(option,sunrise,sunset):
         msg = render_template('option') #call light function
         return statement(msg)
 
+    elif option == "alarm":
+        s = from_string_to_time(sunrise)
+        h = s.hour
+        m = s.minute
+        d = day_of_week(day)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        new_alarm.delay()
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        return statement("Alarm mode!")
     elif option =="off":
         off.delay()
         time.sleep(3)
