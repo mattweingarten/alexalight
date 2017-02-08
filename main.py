@@ -48,9 +48,24 @@ def options(option):
         off.delay()
         power_off()
         return statement("Lights off")
+    elif option =="on":
+        power_on(1.0 ,3100 ,200, 0.8, 2.0)
+        return statement("Lights on")
     elif option =="sunrise":
-        power_on(0.25,3000,55,0.8)
+        power_on(1.0, 2500, 200, 0.8, 20.0)
         return statement("Sunrise mode activated")
+    elif option =="sunset":
+        power_on(1.0, 2500, 200, 0.8, 20.0)
+        return statement("Sunset mode activated")
+    elif option =="night"
+        power_on(1.0, 1000, 200, 0.65, 2.0)
+        return statement("Night mode activated")
+    elif option =="party"
+        power_on(1.0, 2500, 200, 0.5, 20.0)#random??
+        return statement("Party mode activated")
+    elif option =="romance"
+        power_on(1.0, 1100, 200, 0.5, 2.0)
+        return statement("Get it on")
 
 
 if __name__ == '__main__':
