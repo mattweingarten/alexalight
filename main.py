@@ -3,7 +3,8 @@ import requests
 from flask import Flask, render_template, redirect
 from flask_ask import Ask, statement, question, session
 from flask_redis import FlaskRedis
-from tasks import off, new_w, lights
+from tasks import off, new_w
+from automated import lights
 from bulb import power_on, power_off
 from brightness import kelvin, brightness
 from weather import sunrise_sunset
@@ -38,8 +39,10 @@ def stop():
 
 
 @ask.intent("OptionIntent")
-def options(option):
+def options(option,sunrise,sunset):
     if option == "automated":
+        session.attributes['sunrise'] = sunrise
+        session.attributes['sunset'] = sunset
         new_w.delay()
         lights.delay()
         msg = render_template('option') #call light function
