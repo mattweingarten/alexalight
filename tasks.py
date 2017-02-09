@@ -39,16 +39,16 @@ def off():
 
 @app.task
 def lights(sunrise=None,sunset=None):
-    print app.conf.beat_schedule['lights']
+    print app.conf.beat_schedule['light']
     if (sunrise == None and sunset == None ):
         sun = sunrise_sunset()
-        b = brightness(sun['sunrise'],sun['sunset'],1)*0.9
+        b = brightness(sun['sunrise'],sun['sunset'],1)*0.8
         k = kelvin(sun['sunrise'],sun['sunset'],1)
+        power_on(b,k)
     else:
         sunrise =  from_string_to_time(sunrise.encode('ascii','ignore'))
         sunset =  from_string_to_time(sunset.encode('ascii','ignore'))
         b = brightness(sunrise,sunset,1)*0.9
         k = kelvin(sunrise,sunset,1)
-
-    power_on(b,k)
+        power_on(b,k)
     return
