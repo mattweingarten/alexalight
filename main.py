@@ -73,11 +73,20 @@ def options(option,sunrise,sunset,day):
         h = s.hour
         m = s.minute
         d = day_of_week(day)
+
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
         set_alarm_time.delay(h,m,d)
         set_alarm_time.delay(h,m,d)
         set_alarm_time.delay(h,m,d)
         set_alarm_time.delay(h,m,d)
         new_alarm.delay()
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
+        set_alarm_time.delay(h,m,d)
         set_alarm_time.delay(h,m,d)
         set_alarm_time.delay(h,m,d)
         set_alarm_time.delay(h,m,d)

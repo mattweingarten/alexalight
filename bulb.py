@@ -2,7 +2,7 @@ import json
 import requests
 from flask.ext.dotenv import DotEnv
 
-token = "c2e9ec46bacab310314bb0d4386984c450008c9ccb7e760c0c647e861f609948"
+token = "token"
 
 headers = {
     "Authorization": "Bearer %s" % token,

@@ -16,11 +16,13 @@ import time
 # }
 #
 
-
+# @app.on_after_configure.connect
+# def setup_alarm(sender, **kwargs):
+#     sender.add_periodic_tasks(1000000, alarm_mode(),name='alarm')
 
 @app.task
 def set_alarm_time(hour, minute, day):
-        app.conf.beat_schedule['alarm'].update({'schedule': crontab(hour=hour,minute=minute,day_of_week=day)})
+        app.conf.beat_schedule['light'].update({'schedule': crontab(hour=hour,minute=minute,day_of_week=day), 'task': 'alarm.alarm_mode'})
         return
 
 
