@@ -3,7 +3,7 @@ import requests
 from flask import Flask, render_template, redirect
 from flask_ask import Ask, statement, question, session
 from flask_redis import FlaskRedis
-from tasks import off, new_w, lights, new_alarm
+from tasks import off, new_w, lights, new_alarm, party_mode
 from automated import custom_automated
 from bulb import power_on, power_off
 from brightness import kelvin, brightness
@@ -31,7 +31,7 @@ def light_options():
 @ask.intent("HelpIntent")
 
 def help_options():
-    msg = render_template('help', options= ["automated", "on", "off", "wake"])
+    msg = render_template('help', options= ["automated", "on", "off", "alarm","sunrise","sunset","party","romance","night"])
     return question(msg)
 
 
@@ -116,6 +116,16 @@ def options(option,sunrise,sunset,day):
 
     elif option =="party":
         power_on(.75, 2200, 300, 0.5, 2.0)#create a task to go through various colors
+        party_mode.delay()
+        party_mode.delay()
+        party_mode.delay()
+        party_mode.delay()
+        party_mode.delay()
+        new_w.delay()
+        party_mode.delay()
+        party_mode.delay()
+        party_mode.delay()
+        party_mode.delay()
         return statement("Party mode activated")
 
     elif option =="romance":
