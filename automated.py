@@ -1,6 +1,6 @@
 from celery import Celery
 from tasks import app
-
+from alarm import alarm_mode
 
 app.conf.beat_schedule = {
     'light': {
